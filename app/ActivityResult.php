@@ -4,18 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReportResult extends Model
+class ActivityResult extends Model
 {
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-         'questions', 'scores'
-    ];
-
-
+    // protected $fillable = [
+    //     'result', 'date_today','time_slots','main_activities','scaled_activities','scaled_activities_scores'
+    // ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -23,6 +22,7 @@ class ReportResult extends Model
      * @var array
      */
     protected $hidden = [
+
     ];
 
     /**
@@ -31,12 +31,15 @@ class ReportResult extends Model
      * @var array
      */
     protected $casts = [
-        'filled_at' => 'datetime',
-        'questions' => 'json',
-        'scores' => 'json',
-        'filled'=>'boolean'
+        'time_slots' => 'array',
+        'main_activities' => 'array',
+        'scaled_activities' => 'array',
+        'scaled_activities_scores' => 'array',
 
     ];
+
+
+
 
 
 }

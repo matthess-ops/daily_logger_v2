@@ -17,7 +17,11 @@ class CreateActivityResultsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('user_id');
-            $table->json('results');
+            $table->json('time_slots');
+            $table->json('main_activities');
+            $table->json('scaled_activities');
+            $table->json('scaled_activities_scores');
+
             $table->string('date_today');
         });
     }
