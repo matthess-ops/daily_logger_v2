@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Client;
+use Illuminate\Validation\Rule;
+use app\User;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ClientController extends Controller
 {
@@ -12,13 +17,13 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexxx()
+    public function index()
     {
 
-        $this->authorize('viewAny',Client::class);
-        return view('client.index');
-        // $clients = Client::all();
-        // return view('client.index');
+        $clients = Client::all();
+
+        return view('client.index',compact('clients'));
+       
     }
 
     /**
@@ -28,7 +33,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.create');
     }
 
     /**
@@ -50,7 +55,11 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        //
+        error_log('client.show called');
+        $client = Client::find($id);
+        $user = Client::find($id)->user;
+        $client['email'] =  $user->email;
+        return view('client.show',compact('client'));
     }
 
     /**
@@ -61,7 +70,13 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        error_log('client.edit called');
+        $client = Client::find($id);
+        $user = Client::find($id)->user;
+        $client['email'] =  $user->email;
+        return view('client.edit',compact('client'));
+      
+        
     }
 
     /**
@@ -73,7 +88,46 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        error_log('client.update called');
+        $client = Client::find(Auth::id());
+
+        $user = User::find($client->user_id);
+
+            $validatedData = $request->validate([
+                'firstname' => 'required',
+                'lastname' => 'required',
+                'email' => [
+                    'required',
+                    'email',
+                    Rule::unique('users')->ignore($user->id, 'id')
+                ],            'street' => 'required',
+                'street_nr' => 'required',
+                'street' => 'required',
+
+                'postcode'=>'required',
+                'phone_number'=>'required',
+                'city'=>'required',
+            ]);
+
+            $client->firstname= $request->input('firstname');
+            $client->lastname= $request->input('lastname');
+            $client->street= $request->input('street');
+            $client->street_nr= $request->input('street_nr');
+            $client->city= $request->input('city');
+            $client->postcode= $request->input('postcode');
+            $client->phone_number= $request->input('phone_number');
+
+            $client->save();
+            $user->email= $request->input('email');
+
+            $user->save();
+
+
+
+            return redirect()->back();
+
+     
+
     }
 
     /**

@@ -73,6 +73,18 @@
         </nav>
 
        <h1>test page</h1>
+
+       @can('viewAdmin', App\Testpol::class)
+    <h3>Admin moet deze tekst kunnen zien</h3>
+@endcan
+
+@can('viewClient', App\Testpol::class)
+    <h3>Client moet deze tekst kunnen zien</h3>
+@endcan
+
+@can('viewMentor', App\Testpol::class)
+    <h3>mentor moe deze3 tekst unnen zien</h3>
+@endcan
     </div>
 </body>
 </html>

@@ -14,7 +14,7 @@ class KomopController extends Controller
 
         // $this->authorize('viewAny',Client::class);
         $this->authorize('viewAny',Komop::class);
-        return view('client.index');
+        return view('test.test_index');
 
     }
 }

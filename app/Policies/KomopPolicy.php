@@ -19,7 +19,8 @@ class KomopPolicy
     public function viewAny(User $user)
     {
         error_log("komoppolicy - ".$user->role);
-        return true;
+        return $user->role == 'client';
+        // return true;
     }
 
     /**

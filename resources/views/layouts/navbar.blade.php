@@ -23,55 +23,109 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-
-
-        <a class="navbar-brand" >Client</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      {{-- Client navbar  --}}
+
+          @can('isClient', App\Testpol::class)
           <ul class="navbar-nav mr-auto">
-
-
               <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Client_test
+                  Activiteiten
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{route('test.client')}}">Client link</a>
-                  <a class="dropdown-item" href="">Activiteiten</a>
-
-                </div>
-              </li>
-
-
-
-
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Mentor_test
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{route('test.mentor')}}">Mentor link</a>
-                  <a class="dropdown-item" href="">Wachtwoord Wijzigen</a>
-
+                  <a class="dropdown-item" href="">Logger</a>
+                  <a class="dropdown-item" href="">Instellingen</a>
+                  <a class="dropdown-item" href="">Grafieken</a>
                 </div>
               </li>
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Admin_test
+                  Dagelijkse rapportage
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{route('test.admin')}}">Admin link</a>
-                  <a class="dropdown-item" href="">Wachtwoord Wijzigen</a>
-
+                  <a class="dropdown-item" href="">Overzicht</a>
+                  <a class="dropdown-item" href="">Grafieken</a>
                 </div>
               </li>
 
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ route('Client.show', ['id' =>Auth::id()])}}">Gegevens</a>
+                  <a class="dropdown-item" href="">Wachtwoord Wijzigen</a>
+                </div>
+              </li>
           </ul>
+          @endcan
+
+          @can('isAdmin', App\Testpol::class)
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Clienten
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="">Zoeken</a>
+                  <a class="dropdown-item" href="">Toevoegen</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Begeleiders
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="">Zoeken</a>
+                  <a class="dropdown-item" href="">Toevoegen</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Rapportage
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="">Instellen</a>
+                </div>
+              </li>
+          </ul>
+          @endcan
+
+          @can('isMentor', App\Testpol::class)
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Clienten
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="">Zoeken</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Rapportages
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="">Open</a>
+                  {{-- <a class="dropdown-item" href="">Toevoegen</a> --}}
+                </div>
+              </li>
+
+              {{-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Rapportage
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="">Instellen</a>
+                </div>
+              </li> --}}
+          </ul>
+          @endcan
+
           <a class="nav-item nav-link justify-content-end text-light" href="{{ route('logout') }}" onclick="event.preventDefault();
           document.getElementById('logout-form').submit();">
 {{ __('Logout') }}
