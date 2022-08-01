@@ -9,3 +9,9 @@ scaled_activities -> user_id, name
 report_results user_id, date, questions, scores
 activity_results user_id, date, day_results
 
+
+client stuff:
+
+password: edit
+client: create, store,show
+
