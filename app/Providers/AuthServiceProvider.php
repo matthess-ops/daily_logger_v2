@@ -42,6 +42,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isMentor', function (User $user) {
             return $user->role ==='mentor';
         });
-    
+
+        Gate::define('canUpdatePass', function (User $user,User $userPass) {
+            error_log('GATE canUpdatePass called');
+            if($user->id ===$userPass->id or $user->role === 'admin'){
+                return true;
+            }
+        });
     }
 }

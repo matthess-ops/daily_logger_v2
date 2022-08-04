@@ -21,41 +21,36 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/testcan', function () {
-    return view('test.test_index');
-})->middleware('auth');
-
-
-// Route::group(['prefix' => 'client'], function() {
-//     Route::get('/', 'ClientController@index')->name('Client.index');
-//     Route::get('/create', 'ClientController@create')->name('Client.create');
-//     Route::post('/create', 'ClientController@store')->name('Client.store');
-//     Route::get('/{user}/show', 'ClientController@show')->name('Client.show');
-//     Route::get('/{user}/edit', 'ClientController@edit')->name('Client.edit');
-//     Route::patch('/{user}/update', 'ClientController@update')->name('Client.update');
-//     Route::delete('/{user}/delete', 'ClientController@destroy')->name('Client.destroy');
-// });
-
-
-Route::get('testpolicy/', 'KomopController@index')->middleware('auth');
-
-
-Route::get('client/', 'TestpolController@clientview')->name('test.client')->middleware('auth');
-Route::get('mentor/', 'TestpolController@mentorview')->name('test.mentor')->middleware('auth');
-Route::get('admin/', 'TestpolController@adminview')->name('test.admin')->middleware('auth');
-
-Route::get('testpage/', 'TestController@testpage')->name('test.testpage');
-
-Route::get('/clientsa', 'ClientController@indexxx')->name('Client.index')->middleware('auth');
-
-
 
 Route::group(['prefix' => 'client'], function() {
-    Route::get('/', 'ClientController@index')->name('Client.index')->middleware('auth');
-    Route::get('/create', 'ClientController@create')->name('Client.create')->middleware('auth');
-    Route::post('/create', 'ClientController@store')->name('Client.store')->middleware('auth');
-    Route::get('/{id}/show', 'ClientController@show')->name('Client.show')->middleware('auth');
-    Route::get('/{id}/edit', 'ClientController@edit')->name('Client.edit')->middleware('auth');
-    Route::patch('/{id}/update', 'ClientController@update')->name('Client.update')->middleware('auth');
-    Route::delete('/{id}/delete', 'ClientController@destroy')->name('Client.destroy')->middleware('auth');
+
+    Route::get('/', 'ClientController@index')->name('client.index')->middleware('auth');
+    Route::get('/create', 'ClientController@create')->name('client.create')->middleware('auth');
+    Route::post('/create', 'ClientController@store')->name('client.store')->middleware('auth');
+    Route::get('/{id}/show', 'ClientController@show')->name('client.show')->middleware('auth');
+    Route::patch('/{id}/update', 'ClientController@update')->name('client.update')->middleware('auth');
+    Route::delete('/{id}/delete', 'ClientController@destroy')->name('client.destroy')->middleware('auth');
+    Route::get('/{id}/edit', 'ClientController@edit')->name('client.edit')->middleware('auth');
+
+});
+
+Route::group(['prefix' => 'activities'], function() {
+
+    Route::get('/', 'ActivitiesController@index')->name('activities.index')->middleware('auth');
+    Route::get('/create', 'ActivitiesController@create')->name('activities.create')->middleware('auth');
+    Route::post('/create', 'ActivitiesController@store')->name('activities.store')->middleware('auth');
+    // no show id needed
+    Route::get('/show', 'ActivitiesController@show')->name('activities.show')->middleware('auth');
+    Route::patch('/{id}/update', 'ActivitiesController@update')->name('activities.update')->middleware('auth');
+    Route::delete('/{id}/delete', 'ActivitiesController@destroy')->name('activities.destroy')->middleware('auth');
+    Route::get('/{id}/edit', 'ActivitiesController@edit')->name('activities.edit')->middleware('auth');
+
+});
+
+
+Route::group(['prefix' => 'password'], function() {
+
+    Route::get('/{id}/edit', 'PasswordController@edit')->name('password.edit')->middleware('auth');
+    Route::patch('/{id}/update', 'PasswordController@update')->name('password.update')->middleware('auth');
+
 });

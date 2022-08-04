@@ -32,7 +32,7 @@ class LoginController extends Controller
         $role = Auth::user()->role;
         switch ($role) {
           case 'client':
-            return  route('test.client');
+            return  route('client.index');
             break;
           case 'mentor':
             return route('test.mentor');

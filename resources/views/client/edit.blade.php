@@ -3,7 +3,7 @@
 @section('content')
     <h3>Persoonlijke gegevens wijzigen</h3>
     {{-- "{{ route('client.account.save') }}" --}}
-    <form action="{{ route('Client.update',['id'=>Auth::id()]) }}" method="POST">
+    <form action="{{ route('client.update',['id'=>Auth::id()]) }}" method="POST">
         {{ method_field('patch') }}
 
         @csrf

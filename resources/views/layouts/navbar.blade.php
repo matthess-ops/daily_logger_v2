@@ -34,7 +34,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="">Logger</a>
-                  <a class="dropdown-item" href="">Instellingen</a>
+                  <a class="dropdown-item" href="{{ route('activities.show', ['id' =>Auth::id()])}}">Instellingen</a>
                   <a class="dropdown-item" href="">Grafieken</a>
                 </div>
               </li>
@@ -54,8 +54,8 @@
                   Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="{{ route('Client.show', ['id' =>Auth::id()])}}">Gegevens</a>
-                  <a class="dropdown-item" href="">Wachtwoord Wijzigen</a>
+                  <a class="dropdown-item" href="{{ route('client.show', ['id' =>Auth::id()])}}">Gegevens</a>
+                  <a class="dropdown-item" href="{{ route('password.edit', ['id' =>Auth::id()])}}">Wachtwoord Wijzigen</a>
                 </div>
               </li>
           </ul>

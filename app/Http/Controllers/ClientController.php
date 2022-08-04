@@ -23,7 +23,7 @@ class ClientController extends Controller
         $clients = Client::all();
 
         return view('client.index',compact('clients'));
-       
+
     }
 
     /**
@@ -56,8 +56,12 @@ class ClientController extends Controller
     public function show($id)
     {
         error_log('client.show called');
+
         $client = Client::find($id);
-        $user = Client::find($id)->user;
+        $user = User::find($client->user_id);
+
+        $this->authorize('view',$client);
+
         $client['email'] =  $user->email;
         return view('client.show',compact('client'));
     }
@@ -72,11 +76,15 @@ class ClientController extends Controller
     {
         error_log('client.edit called');
         $client = Client::find($id);
+        $this->authorize('view',$client);
+
+
         $user = Client::find($id)->user;
+
         $client['email'] =  $user->email;
         return view('client.edit',compact('client'));
-      
-        
+
+
     }
 
     /**
@@ -90,6 +98,7 @@ class ClientController extends Controller
     {
         error_log('client.update called');
         $client = Client::find(Auth::id());
+        $this->authorize('update',$client);
 
         $user = User::find($client->user_id);
 
@@ -126,7 +135,7 @@ class ClientController extends Controller
 
             return redirect()->back();
 
-     
+
 
     }
 

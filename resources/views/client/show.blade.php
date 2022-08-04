@@ -9,6 +9,6 @@
 <span>{{$client->email}} </span> <br>
 <span>{{$client->phone_number}} </span> <br><br>
 <span>Nieuw adres? Andere naam? Dat en meer pas je hier aan. </span><br>
-<a name="" id="" class="btn btn-primary" href="{{route('Client.edit', ['id' =>Auth::id()])}}"  role="button">Account wijzigen</a>
+<a name="" id="" class="btn btn-primary" href="{{ route('client.edit', ['id' =>Auth::id()])}}" role="button">Account wijzigen</a>
 
 @endsection
